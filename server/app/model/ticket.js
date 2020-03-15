@@ -27,7 +27,7 @@ const ticketModel = new Schema({
         enum : ['malware', 'virus', 'baseline', 'phishing', 'ddos']
     },
     linked_case: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'case'
     },
     assigned_group: String,

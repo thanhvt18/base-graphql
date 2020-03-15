@@ -27,6 +27,14 @@ const caseModel = new Schema({
     description: String,
     sla: Number,
     owner: String,
+    alerts: [{
+        type: String,
+        ref: 'alert'
+    }],
+    tickets: [{
+        type: String,
+        ref: 'ticket'
+    }]
 
 });
 

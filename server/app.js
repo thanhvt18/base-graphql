@@ -9,7 +9,7 @@ const graphqlHTTP = require('express-graphql');
 
 let app = express();
 
-let config = require('./config/config');
+let config = require('./config');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //======================================================
 // connect database
-mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: true});
 
 //======================================================
 // routing rest
@@ -51,10 +51,18 @@ app.use(allowCrossDomain);
 
 //======================================================
 // graphql routing
-const schema = require('./schema/schema');
+const extensions = ({document, variables, operationName, result, context,}) => {
+  return {
+    runTime: Date.now() - context.startTime,
+  };
+};
+
+const schema = require('./app/schema/schema');
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql:true,
+  context: { startTime: Date.now() },
+  extensions
 }));
 
 //======================================================

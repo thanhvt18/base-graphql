@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const alertModel = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     alert_id: {
         type: String,
         unique: true,
@@ -17,7 +16,7 @@ const alertModel = new Schema({
     object: String,
     type: {
         type: String,
-        enum : ['malware', 'virus', 'baseline', 'phishing', 'ddos']
+        enum : ['malware', 'virus', 'baseline', 'phishing', 'ddos', 'xxs']
     },
     status: {
         type: String,
@@ -26,7 +25,7 @@ const alertModel = new Schema({
     },
     message: String,
     linked_case: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'case'
     },
     source_log:  String,
@@ -50,5 +49,7 @@ const alertModel = new Schema({
     device_vendor: String,
     device_version: String,
 });
+
+alertModel.index({alert_id: 1});
 
 module.exports = mongoose.model('alert', alertModel);
