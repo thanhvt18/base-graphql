@@ -24,4 +24,4 @@ RUN npm build
 FROM nginx:alpine
 #COPY nginx.conf /etc/nginx/conf.d
 WORKDIR /usr/share/nginx/html
-COPY --from=build-stage /opt/${app_name}/dist/portal/ .
+COPY --from=build-stage /opt/portal/dist/portal/ .
