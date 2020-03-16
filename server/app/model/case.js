@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const caseModel = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     case_id: {
         type: String,
         unique: true,

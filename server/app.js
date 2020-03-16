@@ -15,7 +15,7 @@ let config = require('./config');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+app.use(logger(':method :url :status :res[content-length] - :response-time ms'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

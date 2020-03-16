@@ -21,6 +21,7 @@ const RootMutation = new GraphQLObjectType({
     fields: {
         create_alert: alertService.create,
         update_alert: alertService.update,
+        update_alerts: alertService.update_many,
         delete_alert: alertService.delete,
         create_case: caseService.create,
         update_case: caseService.update,

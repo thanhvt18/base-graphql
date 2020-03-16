@@ -23,6 +23,7 @@ const alertModel = new Schema({
         enum : ['open', 'close'],
         default: 'open'
     },
+    reason_close: String,
     message: String,
     linked_case: {
         type: Schema.Types.ObjectId,

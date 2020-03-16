@@ -10,8 +10,8 @@ services:
     ports:
     - '27017-27019:27017-27019'
     volumes:
-    - ./data/db:/data/db
-    - ./data/configdb:/data/configdb
+    - ./db-init/data/db:/data/db
+    - ./db-init/data/configdb:/data/configdb
 
   mongo-express:
     image: mongo-express
@@ -22,5 +22,16 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin123
+    depends_on:
+      - database
+
+  soc-server:
+    image: soc-server
+    container_name: 'soc-server:1.0.0'
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./config-prod.js:/opt/server/config-prod.js
     depends_on:
       - database

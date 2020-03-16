@@ -23,10 +23,27 @@ const TicketPrototype = {
     user_update: { type: GraphQLString }
 };
 
+const TicketParam = {
+    _id: { type: GraphQLString },
+    ticket_id: { type: GraphQLString },
+    severity: { type: SeverityEnumType },
+    created: { type: GraphQLInt },
+    title: { type: GraphQLString },
+    status: { type: GraphQLString },
+    type: { type: IncidentTypeEnumType },
+    linked_case: { type: GraphQLString },
+    assigned_group: { type: GraphQLString },
+    assignee: { type: GraphQLString },
+    description: { type: GraphQLString },
+    last_updated: { type: GraphQLInt },
+    user_update: { type: GraphQLString }
+};
+
 const TicketType = new GraphQLObjectType({
     name: 'ticket',
     fields: () => (TicketPrototype),
 });
 
+exports.TicketType = TicketType;
 exports.TicketType = TicketType;
 exports.TicketPrototype = TicketPrototype;

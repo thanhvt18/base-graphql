@@ -22,10 +22,10 @@ const CasePrototype = {
     severity: { type: SeverityEnumType },
     description: { type: GraphQLString },
     sla: { type: GraphQLInt },
-    owner: { type: GraphQLString },
-    alerts: {type: GraphQLList(GraphQLString)},
-    // tickets: {type: new GraphQLList(TicketType)},
+    owner: { type: GraphQLString }
 };
+
+const CaseParam = Object.assign(CasePrototype);
 
 const CaseType = new GraphQLObjectType({
     name: 'case',
@@ -33,4 +33,5 @@ const CaseType = new GraphQLObjectType({
 });
 
 exports.CasePrototype = CasePrototype;
+exports.CaseParam = CaseParam;
 exports.CaseType = CaseType;

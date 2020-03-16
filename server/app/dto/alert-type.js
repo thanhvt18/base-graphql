@@ -15,8 +15,43 @@ const AlertPrototype = {
     object: { type: GraphQLString },
     type: { type: IncidentTypeEnumType },
     status: { type: GraphQLString },
+    reason_close: { type: GraphQLString },
     message: { type: GraphQLString },
     linked_case: { type: CaseType },
+    source_log:  { type: GraphQLString },
+    category: { type: GraphQLString },
+    source: { type: GraphQLString },
+    owner: { type: GraphQLString },
+    organization_group: { type: GraphQLString },
+    reason_false_positive: { type: GraphQLString },
+    last_updated: { type: GraphQLInt },
+    user_update: { type: GraphQLString },
+    dst: { type: GraphQLString },
+    dpt: { type: GraphQLString },
+    rule_id: { type: GraphQLString },
+    spt: { type: GraphQLString },
+    src: { type: GraphQLString },
+    description: { type: GraphQLString },
+    attacker: { type: GraphQLString },
+    sub_category: { type: GraphQLString },
+    timestamp: { type: GraphQLInt },
+    incident_id: { type: GraphQLString },
+    device_vendor: { type: GraphQLString },
+    device_version: { type: GraphQLString },
+};
+
+const AlertParam = {
+    _id: { type: GraphQLString },
+    alert_id: { type: GraphQLString },
+    alert_ids: { type: GraphQLString },
+    severity: { type: SeverityEnumType },
+    created: { type: GraphQLInt },
+    object: { type: GraphQLString },
+    type: { type: IncidentTypeEnumType },
+    status: { type: GraphQLString },
+    reason_close: { type: GraphQLString },
+    message: { type: GraphQLString },
+    linked_case: { type: GraphQLString },
     source_log:  { type: GraphQLString },
     category: { type: GraphQLString },
     source: { type: GraphQLString },
@@ -45,4 +80,5 @@ const AlertType = new GraphQLObjectType({
 });
 
 exports.AlertType = AlertType;
+exports.AlertParam = AlertParam;
 exports.AlertPrototype = AlertPrototype;

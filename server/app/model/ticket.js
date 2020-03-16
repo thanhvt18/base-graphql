@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ticketModel = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     ticket_id: {
         type: String,
         unique: true,

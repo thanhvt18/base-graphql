@@ -4,7 +4,7 @@ const { GraphQLObjectType, GraphQLString, GraphQLNonNull,
 
 const CaseModel = require('../model/case');
 const CaseType = require('../dto/case-type').CaseType;
-const CasePrototype = require('../dto/case-type').CasePrototype;
+const CaseParam = require('../dto/case-type').CaseParam;
 
 
 exports.cases = {
@@ -25,7 +25,7 @@ exports.case = {
 
 exports.create = {
     type: CaseType,
-    args: CasePrototype,
+    args: CaseParam,
     resolve: async (parent, args) => {
         const caseInstance = new CaseModel(args);
         return await caseInstance.save();
@@ -33,7 +33,7 @@ exports.create = {
 };
 
 exports.delete = {
-    type: CaseModel,
+    type: CaseType,
     args: {case_id : {type: GraphQLString}},
     resolve: async (parent, args, request) => {
         return CaseModel.findOneAndDelete(args);
@@ -41,8 +41,8 @@ exports.delete = {
 };
 
 exports.update = {
-    type: CaseModel,
-    args: CasePrototype,
+    type: CaseType,
+    args: CaseParam,
     resolve: async (parent, args, request) => {
         await CaseModel.findOneAndUpdate({case_id: args.case_id},args);
         return CaseModel.findOne({case_id: args.case_id});

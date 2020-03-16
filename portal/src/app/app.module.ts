@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
 import {HttpLink, HttpLinkModule} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
     AppRoutingModule,
     HttpClientModule,
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: APOLLO_OPTIONS,
@@ -25,7 +29,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
-          uri: 'http://localhost.com/graphql'
+          uri: environment.graphql_uri
         })
       };
     },

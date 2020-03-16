@@ -1,2 +1,44 @@
-<p>alert-layout works!</p>
-{{data}}
+<div class="alert-layout-container">
+  <div class="page-title">Alert Management</div>
+  <div class="action">
+    <button class="btn btn-danger" (click)="setFalsePositive()">False positive</button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      [disabled]="row['status'] === 'close'"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsRender">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="!columnsDisplaySpecial.includes(column)">{{element[column]}}</div>
+        <div *ngIf="columnsDisplaySpecial.includes(column)">
+          <span *ngIf="column === 'linked_case' && element[column]">{{element[column]['case_id']}}</span>
+          <span *ngIf="column === 'created' && element[column]">{{element[column]}}</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+</div>
