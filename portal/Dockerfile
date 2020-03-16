@@ -19,7 +19,7 @@ COPY ./tslint.json /opt/${app_name}
 
 WORKDIR /opt/${app_name}
 
-RUN npm buid
+RUN npm build
 
 FROM nginx:alpine
 #COPY nginx.conf /etc/nginx/conf.d
