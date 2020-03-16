@@ -15,11 +15,12 @@ COPY ./angular.json /opt/${app_name}
 COPY ./env.js /opt/${app_name}
 COPY ./karma.conf.js /opt/${app_name}
 COPY ./tsconfig.json /opt/${app_name}
+COPY ./tsconfig.app.json /opt/${app_name}
 COPY ./tslint.json /opt/${app_name}
 
 WORKDIR /opt/${app_name}
 
-RUN npm run-script build
+RUN npm build
 
 RUN ls /opt/portal/dist/portal/
 
