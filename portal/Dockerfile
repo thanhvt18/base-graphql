@@ -19,7 +19,9 @@ COPY ./tslint.json /opt/${app_name}
 
 WORKDIR /opt/${app_name}
 
-RUN npm build
+RUN npm run script build
+
+RUN ls /opt/portal/dist/portal/
 
 FROM nginx:alpine
 #COPY nginx.conf /etc/nginx/conf.d
