@@ -19,7 +19,7 @@ COPY ./tslint.json /opt/${app_name}
 
 WORKDIR /opt/${app_name}
 
-RUN npm run script build
+RUN npm run-script build
 
 RUN ls /opt/portal/dist/portal/
 
