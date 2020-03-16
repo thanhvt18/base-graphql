@@ -13,8 +13,9 @@ services:
       extra_hosts:
         - "portal.graphql.com:192.168.1.11"
         - "api.graphql.com:192.168.1.11"
-  container_name: 'portal'
+  soc-portal:
       image: 'soc-portal:1.0.0'
+      container_name: 'soc-portal'
       ports:
         - 80:80
       depends_on:

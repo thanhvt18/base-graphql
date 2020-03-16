@@ -16,7 +16,6 @@ COPY ./routes /opt/${app_name}/routes
 COPY ./views /opt/${app_name}/views
 COPY ./app.js /opt/${app_name}
 COPY ./config.js /opt/${app_name}
-COPY ./config.js /opt/${app_name}
 
 WORKDIR /opt/${app_name}
 

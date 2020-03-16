@@ -1,3 +1,3 @@
 module.exports = {
-    database: 'mongodb://root:admin123@192.168.1.11:27017/soc'
+    database: 'mongodb://root:admin123@52.168.79.170:27017/soc'
 };

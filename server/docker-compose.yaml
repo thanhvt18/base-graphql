@@ -26,12 +26,12 @@ services:
       - database
 
   soc-server:
-    image: soc-server
-    container_name: 'soc-server:1.0.0'
+    image: soc-server:1.0.0
+    container_name: 'soc-server'
     restart: always
     ports:
       - 3000:3000
     volumes:
-      - ./config-prod.js:/opt/server/config-prod.js
+      - ./config-prod.js:/opt/server/config.js
     depends_on:
       - database
