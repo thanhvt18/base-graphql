@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  graphql_uri: window['__env']['graphql_uri'] || 'http://localhost.com/graphql'
+  graphql_uri: 'http://localhost.com/graphql'
 };
 
 /*

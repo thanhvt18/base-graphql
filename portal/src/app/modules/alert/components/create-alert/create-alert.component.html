@@ -1,0 +1,74 @@
+<div class="create-alert-container">
+  <div class="title-form text-capitalize">Create</div>
+  <form [formGroup]="form" (ngSubmit)="submitCreateAlert()">
+    <div class="form-element">
+      <div class="label">ALERT ID</div>
+      <div class="flex-grow-1">
+        <input type="text" class="form-control" formControlName="alert_id"
+               [ngClass]="{'is-invalid': isSubmit && form.controls.alert_id.invalid}"
+        >
+        <span class="text-error" *ngIf="isSubmit && form.controls.alert_id.invalid">
+          alert id is required
+        </span>
+      </div>
+    </div>
+
+    <div class="form-element">
+      <div class="label">SEVERITY</div>
+      <div class="flex-grow-1">
+        <mat-form-field>
+          <mat-select formControlName="severity">
+            <mat-option *ngFor="let severity of severityList" [value]="severity">
+              {{severity}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-element">
+      <div class="label">TYPE</div>
+      <div class="flex-grow-1">
+        <mat-form-field>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of typeList" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-element">
+      <div class="label">OBJECT</div>
+      <div class="flex-grow-1">
+        <input type="text" class="form-control" formControlName="object"
+               [ngClass]="{'is-invalid': isSubmit && form.controls.object.invalid}"
+        >
+      </div>
+    </div>
+
+    <div class="form-element">
+      <div class="label">MESSAGE</div>
+      <div class="flex-grow-1">
+        <input type="text" class="form-control" formControlName="message"
+               [ngClass]="{'is-invalid': isSubmit && form.controls.message.invalid}"
+        >
+      </div>
+    </div>
+
+    <div class="form-element">
+      <div class="label">SOURCE LOG</div>
+      <div class="flex-grow-1">
+        <input type="text" class="form-control" formControlName="source_log"
+               [ngClass]="{'is-invalid': isSubmit && form.controls.source_log.invalid}"
+        >
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button type="text" class="btn btn-dark mr-sm-1" (click)="closePopup()">Cancel</button>
+      <button type="submit" class="btn btn-success">create</button>
+    </div>
+  </form>
+</div>

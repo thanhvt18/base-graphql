@@ -10,6 +10,20 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from './../environments/environment';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ToastrModule} from 'ngx-toastr';
+import {DefaultOptions} from 'apollo-client';
+
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -19,9 +33,12 @@ import { environment } from './../environments/environment';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     ApolloModule,
     HttpLinkModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide: APOLLO_OPTIONS,
@@ -30,7 +47,8 @@ import { environment } from './../environments/environment';
         cache: new InMemoryCache(),
         link: httpLink.create({
           uri: environment.graphql_uri
-        })
+        }),
+        defaultOptions,
       };
     },
     deps: [HttpLink]
@@ -38,3 +56,4 @@ import { environment } from './../environments/environment';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

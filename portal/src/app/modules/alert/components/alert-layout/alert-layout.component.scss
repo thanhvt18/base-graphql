@@ -1,16 +1,27 @@
+.c-pointer{
+  cursor: pointer;
+}
+
 .alert-layout-container {
   .page-title {
     font-size: 18px;
     color: white;
-    padding-bottom: 20px;
+    padding: 20px;
   }
 
   .action {
+    padding-left: 20px;
     padding-bottom: 20px;
+    display: flex;
   }
 
   table {
     width: 100%;
     height: calc(100vh - 300px);
+
+    th, td {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 }

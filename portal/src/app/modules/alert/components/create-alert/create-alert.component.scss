@@ -1,0 +1,28 @@
+.create-alert-container {
+
+  .title-form {
+    padding-bottom: 20px;
+    font-size: 18px;
+  }
+
+  form {
+    .form-element {
+      display: flex;
+      margin-bottom: 10px;
+
+      .label {
+        width: 150px;
+        display: flex;
+        align-items: center;
+      }
+
+      .text-error{
+        color: #dd0031;
+      }
+
+      .is-invalid {
+        border-color: #dd0031;
+      }
+    }
+  }
+}

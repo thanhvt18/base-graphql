@@ -3,6 +3,9 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import {MatDialog} from '@angular/material/dialog';
+import {CreateAlertComponent} from '../create-alert/create-alert.component';
+import {NotificationService} from '../../../../services/notification.service';
 
 export interface AlertElement {
   'alert_id'?: string;
@@ -37,10 +40,12 @@ export class AlertLayoutComponent implements OnInit {
     'source_log',
     'category',
     'source',
-    'reason_close'];
+    'reason_close',
+  ];
   displayedColumns: string[] = [
     'select',
-    ...this.columnsRender
+    ...this.columnsRender,
+    'option'
   ];
 
   columnsDisplaySpecial = ['created', 'linked_case'];
@@ -70,7 +75,9 @@ export class AlertLayoutComponent implements OnInit {
   }
 
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private dialog: MatDialog,
+    public notifyService: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -105,6 +112,16 @@ export class AlertLayoutComponent implements OnInit {
     });
   }
 
+  createAlert() {
+    this.dialog.open(CreateAlertComponent, {
+      data: {},
+      height: '500px',
+      width: '800px',
+    }).afterClosed().subscribe(value => {
+      this.getAllAlert();
+    });
+  }
+
   setFalsePositive() {
     const alerts = this.selection.selected;
     if (alerts.length > 0) {
@@ -113,7 +130,7 @@ export class AlertLayoutComponent implements OnInit {
         mutation: gql`
           mutation{
             update_alerts(
-              alert_ids: "${alertids}",
+              alert_ids: "${alertids}"
               status: "close"
               reason_close: "set false positive"
             ){
@@ -136,22 +153,38 @@ export class AlertLayoutComponent implements OnInit {
         `
       }).subscribe(
         ({data}) => {
-          console.log('success', data);
-          const updateAlerts = data['update_alerts'] || [];
-          const alertIds = this.dataSource.data.map(alert => alert.alert_id);
-          for (let pos = 0, length = updateAlerts.length; pos < length; pos++) {
-            const alert = updateAlerts[pos];
-            if (alertIds.includes(alert.alert_id)) {
-              this.dataSource.data[alertIds.indexOf(alert.alert_id)] = alert;
-            }
-          }
-          this.dataSource.data = JSON.parse(JSON.stringify(this.dataSource.data));
+          this.notifyService.showSuccess('set false positive successfully', 'Close alert');
+          this.getAllAlert();
         },
         (error) => {
+          this.notifyService.showError('set false positive unsuccessfully', 'Close alert');
           console.error(error);
           this.selection.clear();
         }
       );
     }
+  }
+
+  deleteAlert(alert) {
+    this.apollo.mutate({
+      mutation: gql`
+          mutation{
+            delete_alert(
+              alert_id: "${alert.alert_id}"
+            ){
+              alert_id
+            }
+          }
+        `
+    }).subscribe(
+        ({data}) => {
+          this.notifyService.showSuccess('delete successfully', 'Close alert');
+          this.getAllAlert();
+        },
+        (error) => {
+          this.notifyService.showError('delete unsuccessfully', 'Close alert');
+          console.error(error);
+        }
+    );
   }
 }
